@@ -2,7 +2,7 @@ import React from "react";
 import "./styles.css";
 import TodoHeader from './component/TodoHeader'
 import NewTodoForm from './component/NewTodoForm'
-import Todo from './component/Todo'
+import Todos from './component/Todos'
 
 let idSeq = 0;
 
@@ -50,22 +50,16 @@ class App extends React.Component {
   render() {
     return (
       <>
-      <div class="container center">
-        <h1 class="center title">My TODO App</h1>
-        <TodoHeader header={{totalCount:this.state.todos.length,
-          uncheckedCount:this.state.todos.filter(todo => todo.checked === false).length
-        }}/>
-        <NewTodoForm onAdd={(text) => this.addTodo(text)}/>
-        <ul class="todo-list">
-          {this.state.todos.map(todo => (
-            <Todo
-              todo={todo}
-              onDelete={() => this.deleteTodo(todo.id)}
-              onToggle={() => this.toggleTodo(todo.id)}
-            />
-          ))}
-        </ul>
-      </div>
+        <div class="container center">
+          <h1 class="center title">My TODO App</h1>
+          <TodoHeader header={{totalCount:this.state.todos.length,
+            uncheckedCount:this.state.todos.filter(todo => todo.checked === false).length
+          }}/>
+          <NewTodoForm onAdd={(text) => this.addTodo(text)}/>
+          <Todos todos={this.state.todos}
+            onDelete={(id) => this.deleteTodo(id)}
+            onToggle={(id) => this.toggleTodo(id)}/>>
+        </div>
       </>
     );
   }
