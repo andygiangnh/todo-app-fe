@@ -1,8 +1,10 @@
 import React from 'react'
 import cx from "classnames";
 import { VISIBILITY_FILTERS } from '../constants'
+import { setFilter } from '../redux/actions'
+import { connect } from 'react-redux'
 
-export default function VisibilityFilter({activeFilter, onFilter}) {
+function VisibilityFilter({activeFilter, setFilter}) {
     return (
         <div>
             {Object.keys(VISIBILITY_FILTERS).map(filterKey => {
@@ -10,10 +12,16 @@ export default function VisibilityFilter({activeFilter, onFilter}) {
                 return (
                 <>
                     <span className={cx("filter", currentFilter === activeFilter && "filter--active")} 
-                        onClick={() => {onFilter(currentFilter)}}>{currentFilter}</span>&nbsp;
+                        onClick={() => {setFilter(currentFilter)}}>{currentFilter}</span>&nbsp;
                 </>
                 )
             })}
         </div>
     )
 }
+
+const mapStateToProps = state => {
+    return { activeFilter: state.visibilityFilter.filter }
+}
+
+export default connect(mapStateToProps, { setFilter })(VisibilityFilter)

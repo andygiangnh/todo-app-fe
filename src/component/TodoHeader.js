@@ -1,10 +1,21 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { getAllTodosCount, getUncheckedTodosCount } from '../redux/selectors'
 
-export default function TodoHeader({header}) {
+const TodoHeader = ({ totalCount, uncheckedCount }) => {
   return (
-    <div class="flow-right controls">
-      <span>Item count: {header.totalCount}</span>
-      <span>unchecked count: {header.uncheckedCount}</span>
+    <div className="flow-right controls">
+      <span>Item count: { totalCount }</span>
+      <span>unchecked count: { uncheckedCount }</span>
     </div>
   )
 }
+
+const mapStateToProps = state => {
+    return { 
+        totalCount: getAllTodosCount(state), 
+        uncheckedCount: getUncheckedTodosCount(state)
+    }
+}
+
+export default connect(mapStateToProps)(TodoHeader)

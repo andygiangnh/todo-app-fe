@@ -1,22 +1,21 @@
 import React from 'react'
 import Todo from './Todo'
-import {VISIBILITY_FILTERS} from '../constants'
+import { connect } from 'react-redux'
+import { getTodosByVisibilityFilter } from '../redux/selectors'
 
-export default function Todos({todos, onDelete, onToggle, filter}) {
+const Todos = ({ todos }) => {
     return (
-        <ul class="todo-list">
-          {todos.filter(todo => {
-              return filter === VISIBILITY_FILTERS.ALL ||
-                (filter === VISIBILITY_FILTERS.COMPLETED && todo.checked === true) ||
-                (filter === VISIBILITY_FILTERS.INCOMPLETED && todo.checked === false)
-
-          }).map(todo => (
-            <Todo
-              todo={todo}
-              onDelete={() => onDelete(todo.id)}
-              onToggle={() => onToggle(todo.id)}
-            />
-          ))}
+        <ul className="todo-list">
+          {todos && todos.length ? todos.map(todo => (
+            <Todo todo={todo}/>
+          )) : 'No todos!'}
         </ul>
     )
 }
+
+const mapStateToProps = state => {
+    const { visibilityFilter } = state
+    return {todos: getTodosByVisibilityFilter(state, visibilityFilter)}
+}
+
+export default connect(mapStateToProps)(Todos)
