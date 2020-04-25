@@ -29,10 +29,18 @@ class NewTodoForm extends React.Component {
                     onChange={(e) => this.onChange(e.target.value)}
                 />
                 <br />
+                {this.props.loading && <span className="center">is saving to server ...</span>}
+                {this.props.error && <span className="center">{this.props.error}</span>}
+                <br />
                 <button className="button center" onClick={this.createTodo}>Add todo</button>
             </>
         )
     }  
 }
 
-export default connect(null, { addTodo })(NewTodoForm)
+const mapStateToProps = state => ({
+    error: state.todos.error?.add,
+    loading: state.todos.loading?.add
+})
+
+export default connect(mapStateToProps, { addTodo })(NewTodoForm)

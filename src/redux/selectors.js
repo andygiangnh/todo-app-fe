@@ -5,16 +5,16 @@ export const getTodos = store => store && store.todos ? store.todos.todos : []
 export const getAllTodosCount = store => getTodos(store).length
 
 export const getUncheckedTodosCount = store => getTodos(store)
-    .filter(todo => !todo.checked).length
+    .filter(todo => !todo.completed).length
 
 export const getTodosByVisibilityFilter = (store, visibilityFilter) => {
     const allTodos = getTodos(store);
 
     switch (visibilityFilter.filter) {
       case VISIBILITY_FILTERS.COMPLETED:
-        return allTodos.filter(todo => todo.checked);
+        return allTodos.filter(todo => todo.completed);
       case VISIBILITY_FILTERS.INCOMPLETE:
-        return allTodos.filter(todo => !todo.checked);
+        return allTodos.filter(todo => !todo.completed);
       case VISIBILITY_FILTERS.ALL:
       default:
         return allTodos;
