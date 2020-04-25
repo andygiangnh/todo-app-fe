@@ -3,13 +3,13 @@ import { SET_FILTER,
     RETRIEVE_TODOS, RETRIEVE_TODOS_SUCCESS, RETRIEVE_TODOS_FAILURE,
     DELETE_TODO_STARTED, DELETE_TODO_SUCCESS, DELETE_TODO_FAILURE,
     TOGGLE_TODO_STARTED, TOGGLE_TODO_SUCCESS, TOGGLE_TODO_FAILURE } from './actionTypes'
-import axios from 'axios'
+import API from './api'
 
 export const addTodo = text => {
     return dispatch => {
         dispatch(addTodoStarted());
 
-        axios.post('http://localhost:9090/todos', {
+        API.post('todos', {
             id: 0,
             description: text,
             completed: false
@@ -27,7 +27,7 @@ export const retrieveTodos = () => {
     return dispatch => {
         dispatch(loadingTodos())
 
-        axios.get('http://localhost:9090/todos')
+        API.get('todos')
         .then(res => {
             dispatch(retrieveTodosSuccess(res.data))
         })
@@ -35,6 +35,48 @@ export const retrieveTodos = () => {
             dispatch(retrieveTodosFailure(err.message))
         })
     }
+}
+
+export const toggleTodo = todo => dispatch => {
+    dispatch({
+        type: TOGGLE_TODO_STARTED
+    })
+    
+    API.put(`todos/${todo.id}`,{
+        ...todo, completed: !todo.completed
+    })
+    .then(res => {
+        dispatch({
+            type:TOGGLE_TODO_SUCCESS,
+            payload: { todo: res.data }
+        })
+    })
+    .catch(err => {
+        dispatch({
+            type:TOGGLE_TODO_FAILURE,
+            payload: { error: err.message }
+        })
+    })
+
+}
+
+export const deleteTodo = id => dispatch => {
+    dispatch({
+        type: DELETE_TODO_STARTED
+    })
+    API.delete(`todos/${id}`)
+    .then(res => {
+        dispatch({
+            type: DELETE_TODO_SUCCESS,
+            payload: { id: res.data }
+        })
+    })
+    .catch(err => {
+        dispatch({
+            type: DELETE_TODO_FAILURE,
+            payload: { error: err.message }
+        })
+    })    
 }
 
 const addTodoStarted = () => ({
@@ -72,48 +114,6 @@ const retrieveTodosFailure = error => ({
         error
     }
 })
-
-export const toggleTodo = todo => dispatch => {
-    dispatch({
-        type: TOGGLE_TODO_STARTED
-    })
-    
-    axios.put(`http://localhost:9090/todos/${todo.id}`,{
-        ...todo, completed: !todo.completed
-    })
-    .then(res => {
-        dispatch({
-            type:TOGGLE_TODO_SUCCESS,
-            payload: { todo: res.data }
-        })
-    })
-    .catch(err => {
-        dispatch({
-            type:TOGGLE_TODO_FAILURE,
-            payload: { error: err.message }
-        })
-    })
-
-}
-
-export const deleteTodo = id => dispatch => {
-    dispatch({
-        type: DELETE_TODO_STARTED
-    })
-    axios.delete(`http://localhost:9090/todos/${id}`)
-    .then(res => {
-        dispatch({
-            type: DELETE_TODO_SUCCESS,
-            payload: { id: res.data }
-        })
-    })
-    .catch(err => {
-        dispatch({
-            type: DELETE_TODO_FAILURE,
-            payload: { error: err.message }
-        })
-    })    
-}
 
 export const setFilter = filter => ({
     type: SET_FILTER,

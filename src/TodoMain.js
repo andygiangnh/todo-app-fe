@@ -5,7 +5,7 @@ import NewTodoForm from './component/NewTodoForm'
 import Todos from './component/Todos'
 import VisibilityFilter from "./component/VisibilityFilter";
 
-export default function App() {
+export default function TodoMain() {
   return (
     <>
       <div className="container center">
