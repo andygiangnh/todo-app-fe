@@ -7,33 +7,7 @@ import {
 } from './actionTypes'
 import API from './api'
 
-// example of using async, await
-export const addTodo = text => async dispatch => {
-  dispatch(addTodoStarted());
-
-  try {
-    const res = await API.post('todos', {
-      id: 0,
-      description: text,
-      completed: false
-    })
-    dispatch(addTodoSuccess(res.data))
-  } catch (err) {
-    dispatch(addTodoFailure(err.message))
-  }
-}
-
-export const retrieveTodos = () => async dispatch => {
-  dispatch(loadingTodos())
-
-  try {
-    const res = await API.get('todos')
-    dispatch(retrieveTodosSuccess(res.data))
-  } catch (err) {
-    dispatch(retrieveTodosFailure(err.message))
-  }
-}
-
+// example of thunk using async, await
 export const toggleTodo = todo => async dispatch => {
   dispatch(toggleTodoStarted())
 
@@ -47,7 +21,7 @@ export const toggleTodo = todo => async dispatch => {
   }
 }
 
-// example of using Promise
+// example of thunk using Promise
 export const deleteTodo = id => dispatch => {
   dispatch(deleteTodoStarted())
 
@@ -60,36 +34,39 @@ export const deleteTodo = id => dispatch => {
     })
 }
 
-const addTodoStarted = () => ({
-  type: ADD_TODO_STARTED
+export const addTodo = (description) => ({
+  type: ADD_TODO_STARTED,
+  payload: {
+    description
+  }
 })
 
-const addTodoSuccess = todo => ({
+export const addTodoSuccess = todo => ({
   type: ADD_TODO_SUCCESS,
   payload: {
     ...todo
   }
 })
 
-const addTodoFailure = error => ({
+export const addTodoFailure = error => ({
   type: ADD_TODO_FAILURE,
   payload: {
     error
   }
 })
 
-const loadingTodos = () => ({
+export const loadingTodos = () => ({
   type: RETRIEVE_TODOS
 })
 
-const retrieveTodosSuccess = todos => ({
+export const retrieveTodosSuccess = todos => ({
   type: RETRIEVE_TODOS_SUCCESS,
   payload: {
     todos
   }
 })
 
-const retrieveTodosFailure = error => ({
+export const retrieveTodosFailure = error => ({
   type: RETRIEVE_TODOS_FAILURE,
   payload: {
     error

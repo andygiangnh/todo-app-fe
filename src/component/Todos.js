@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Todo from './Todo'
 import { connect } from 'react-redux'
 import { getTodosByVisibilityFilter } from '../redux/selectors'
-import { retrieveTodos } from '../redux/actions'
+import { loadingTodos } from '../redux/actions'
 
 class Todos extends Component {
 
@@ -36,12 +36,10 @@ const mapStateToProps = state => {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    retrieveTodos: () => {
-      dispatch(retrieveTodos())
-    }
-  }
-}
+const mapDispatchToProps = dispatch => (
+  {retrieveTodos: () => dispatch(loadingTodos())}
+)
 
 export default connect(mapStateToProps, mapDispatchToProps)(Todos)
+
+// is equivalant to: connect(mapStateToProps, { loadingTodos })(Todos)
