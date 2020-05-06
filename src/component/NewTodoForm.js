@@ -1,6 +1,24 @@
 import React from "react";
 import { connect } from 'react-redux'
 import { addTodo } from '../redux/actions'
+import styled from "styled-components";
+
+const NewTodoDiv = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`
+
+const newTodoText = {
+    flex: 1,
+    marginBottom: '10px',
+    marginTop: '10px'
+}
+
+const todoButton = {
+    padding: '10px 20px',
+    flex: 1
+}
 
 class NewTodoForm extends React.Component {
   
@@ -20,20 +38,18 @@ class NewTodoForm extends React.Component {
 
     render() {
         return (
-            <>
-                <textarea className= "center todo-text"
+            <NewTodoDiv>
+                <textarea style={newTodoText}
                     type="text"
                     rows="4"
                     cols="40"
                     value={this.state.description}
                     onChange={(e) => this.onChange(e.target.value)}
                 />
-                <br />
                 {this.props.loading && <span className="center">is saving to server ...</span>}
                 {this.props.error && <span className="center">{this.props.error}</span>}
-                <br />
-                <button className="button center" onClick={this.createTodo}>Add todo</button>
-            </>
+                <button style={todoButton} onClick={this.createTodo}>Add todo</button>
+            </NewTodoDiv>
         )
     }  
 }

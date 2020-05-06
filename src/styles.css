@@ -49,7 +49,7 @@
   }
   
   .todo-delete {
-    float: right;
+    flex: 1
   }
   
   .todo-checkbox {
@@ -58,6 +58,7 @@
   
   .todo-text {
     margin: 10px;
+    flex: 1
   }
   
   .todo-container {
