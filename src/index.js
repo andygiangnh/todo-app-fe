@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import TodoMain from './TodoMain';
+import TodoMain from './pages/TodoMain';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
 import store from './redux/store'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import LoginPage from './LoginPage';
+import LoginPage from './pages/LoginPage';
 
 ReactDOM.render(
   <Provider store={ store }>
