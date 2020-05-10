@@ -7,13 +7,14 @@ import { Provider } from 'react-redux'
 import store from './redux/store'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import LoginPage from './pages/LoginPage';
+import ProtectedRoute from './auth/ProtectedRoute'
 
 ReactDOM.render(
   <Provider store={ store }>
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component = { LoginPage } />
-        <Route exact path="/app" component={ TodoMain } />
+        <ProtectedRoute exact path="/app" component={ TodoMain } />
         <Route path="*" component={() => "404 NOT found"} />
       </Switch>
     </BrowserRouter>
