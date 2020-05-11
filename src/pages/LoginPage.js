@@ -34,7 +34,6 @@ class LoginPage extends React.Component {
       this.setState({loginStatus:''})
       this.props.history.push('/app')
     } else {
-      console.log('what the hell')
       this.setState({loginStatus:'Invalid login'})
     }
   }

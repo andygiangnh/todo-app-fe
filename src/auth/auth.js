@@ -1,19 +1,24 @@
+import API from '../redux/actions/api'
 class Auth {
     constructor() {
         this.authenticated = false
     }
 
-    login({ username, password }, cb) {
-        if (username === 'admin@email.com' && password === 'password') {
-            console.log('successful login')
-            this.authenticated = true
-        }
-        console.log('login failed')
+    login(credentials, cb) {
+        API.post('/authenticate', credentials)
+        .then(res => {
+            if(res.data.success) {
+                this.authenticated = true
+                // Add a request interceptor
+                localStorage.setItem('token', res.data.token)
+            }
+        })
         cb()
     }
 
     logout(cb) {
         this.authenticated = false
+        localStorage.setItem('token', '')
         cb()
     }
 
