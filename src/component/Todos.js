@@ -17,7 +17,7 @@ class Todos extends Component {
         {loading? <span>Loading todos...</span> :
           <ul className="todo-list">
             {todos && todos.length ? todos.map(todo => (
-              <Todo todo={todo}/>
+              <Todo key={todo.id} todo={todo}/>
             )) : 'No todos!'}
           </ul>
         }

@@ -10,10 +10,8 @@ function VisibilityFilter({activeFilter, setFilter}) {
             {Object.keys(VISIBILITY_FILTERS).map(filterKey => {
                 const currentFilter = VISIBILITY_FILTERS[filterKey]
                 return (
-                <>
-                    <span className={cx("filter", currentFilter === activeFilter && "filter--active")} 
-                        onClick={() => {setFilter(currentFilter)}}>{currentFilter}</span>&nbsp;
-                </>
+                    <span key= {filterKey} className={cx("filter", currentFilter === activeFilter && "filter--active")} 
+                        onClick={() => {setFilter(currentFilter)}}>{currentFilter}</span>
                 )
             })}
         </div>

@@ -1,29 +1,22 @@
 import API from '../redux/actions/api'
 class Auth {
-    constructor() {
-        this.authenticated = false
-    }
 
-    login(credentials, cb) {
-        API.post('/authenticate', credentials)
-        .then(res => {
+    async login(credentials) {
+        try {
+            const res = await API.post('/authenticate', credentials)
             if(res.data.success) {
-                this.authenticated = true
-                // Add a request interceptor
                 localStorage.setItem('token', res.data.token)
             }
-        })
-        cb()
+        } catch(err) {}
     }
 
     logout(cb) {
-        this.authenticated = false
-        localStorage.setItem('token', '')
+        localStorage.removeItem('token')
         cb()
     }
 
     isAuthenticated() {
-        return this.authenticated
+        return !!localStorage.getItem('token')
     }
 }
 

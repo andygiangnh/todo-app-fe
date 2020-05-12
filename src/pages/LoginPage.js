@@ -44,11 +44,10 @@ class LoginPage extends React.Component {
         <Formik initialValues={{ email: '', password: ''}}
           validationSchema={ validationSchema }
           onSubmit={(values, { setSubmitting }) => {
-            auth.login({ username: values.email, password: values.password }, () => {
-              setTimeout(() => {
+            auth.login({ username: values.email, password: values.password })
+              .then(() => {
                 this.loginHandler(setSubmitting)
-              }, 2000)
-            })
+              })
           }}
         >
           {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
@@ -83,7 +82,7 @@ class LoginPage extends React.Component {
       </>
     )
   }
-  }
+}
   
 
 export default LoginPage
