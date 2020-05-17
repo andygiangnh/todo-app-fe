@@ -4,18 +4,14 @@ import * as Yup from 'yup'
 import styled from 'styled-components'
 import auth from '../auth/auth'
 
-const emailRegex = /^$|^((?![._-]+)(?!.*[._-]{2})[a-zA-Z0-9._-]*)[a-zA-Z0-9]+@((?![._-]+)(?!.*[._-]{2})[a-zA-Z0-9._-]*)[a-zA-Z0-9]+[.]{1}[a-zA-Z0-9._-]*[a-zA-Z0-9]+$/
-
 const LoginContainer = styled.div `
   width: 400px;
   display: flex;
   align: center
 `
 const validationSchema = Yup.object().shape({
-  email: Yup.string()
-    .trim()
-    .matches(emailRegex, 'Invalid email address')
-    .required('Email is blank'),
+  username: Yup.string()
+    .required('Username is blank'),
   password: Yup.string()
     .required('Password is blank')
 })
@@ -41,10 +37,10 @@ class LoginPage extends React.Component {
   render() {
     return (
       <>
-        <Formik initialValues={{ email: '', password: ''}}
+        <Formik initialValues={{ username: '', password: ''}}
           validationSchema={ validationSchema }
           onSubmit={(values, { setSubmitting }) => {
-            auth.login({ username: values.email, password: values.password })
+            auth.login({ username: values.username, password: values.password })
               .then(() => {
                 this.loginHandler(setSubmitting)
               })
@@ -54,12 +50,12 @@ class LoginPage extends React.Component {
             <LoginContainer>
               <form onSubmit={handleSubmit}>
               <div>
-                <label htmlFor="email">Email</label>
-                <input type="text" name="email" id="email" placeholder="Email"
+                <label htmlFor="username">User Name</label>
+                <input type="text" name="username" id="username" placeholder="username"
                   onChange={handleChange}
                   onBlur={handleBlur}
-                  value={values.email} />
-                {errors.email && touched.email && errors.email}
+                  value={values.username} />
+                {errors.username && touched.username && errors.username}
               </div>
               <div>
                 <label htmlFor="password">Password</label>

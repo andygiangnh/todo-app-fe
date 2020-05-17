@@ -1,5 +1,6 @@
 import React from 'react'
-import { withRouter } from 'react-router'
+import { connect } from 'react-redux'
+import { withRouter, Redirect } from 'react-router'
 import auth from '../auth/auth'
 
 const style = {
@@ -8,14 +9,23 @@ const style = {
 
 const Logout = (props) => {
     return (
-        <div>
-            <button style={style} onClick={() => {
-                auth.logout(() => {
-                    props.history.push("/")
-                })
-            }}>Logout</button>
-        </div>
+        <>
+            { !props.logout ? 
+                <div>
+                    <button style={style} onClick={() => {
+                        auth.logout(() => {
+                            props.history.push("/")
+                        })
+                    }}>Logout</button>
+                </div>
+                : <Redirect to={ { pathname: '/' } } />
+            }
+        </>
     )
 }
 
-export default withRouter(Logout)
+const mapStateToProps = state => ({
+    logout: state.todos.logout
+})
+
+export default withRouter(connect(mapStateToProps)(Logout))

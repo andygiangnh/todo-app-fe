@@ -15,3 +15,5 @@ export const TOGGLE_TODO_SUCCESS = "TOGGLE_TODO_SUCCESS"
 export const TOGGLE_TODO_FAILURE = "TOGGLE_TODO_FAILURE"
 
 export const SET_FILTER = "SET_FILTER"
+
+export const LOGOUT = "LOGOUT"
