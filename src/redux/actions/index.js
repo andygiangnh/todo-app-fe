@@ -3,7 +3,8 @@ import {
   ADD_TODO_STARTED, ADD_TODO_SUCCESS, ADD_TODO_FAILURE,
   RETRIEVE_TODOS, RETRIEVE_TODOS_SUCCESS, RETRIEVE_TODOS_FAILURE,
   DELETE_TODO_STARTED, DELETE_TODO_SUCCESS, DELETE_TODO_FAILURE,
-  TOGGLE_TODO_STARTED, TOGGLE_TODO_SUCCESS, TOGGLE_TODO_FAILURE
+  TOGGLE_TODO_STARTED, TOGGLE_TODO_SUCCESS, TOGGLE_TODO_FAILURE,
+  LOGIN_SUCCESS
 } from './actionTypes'
 import API from './api'
 
@@ -53,6 +54,11 @@ export const addTodoFailure = error => ({
   payload: {
     error
   }
+})
+
+export const loginSucceeded = (user) => ({
+  type: LOGIN_SUCCESS,
+  payload: { user }
 })
 
 export const loadingTodos = () => ({

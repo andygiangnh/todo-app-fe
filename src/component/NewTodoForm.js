@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux'
 import { addTodo } from '../redux/actions'
+import { Button } from 'react-bootstrap';
 import styled from "styled-components";
 
 const NewTodoDiv = styled.div`
@@ -13,11 +14,6 @@ const newTodoText = {
     flex: 1,
     marginBottom: '10px',
     marginTop: '10px'
-}
-
-const todoButton = {
-    padding: '10px 20px',
-    flex: 1
 }
 
 class NewTodoForm extends React.Component {
@@ -48,7 +44,7 @@ class NewTodoForm extends React.Component {
                 />
                 {this.props.loading && <span className="center">is saving to server ...</span>}
                 {this.props.error && <span className="center">{this.props.error}</span>}
-                <button style={todoButton} onClick={this.createTodo}>Add todo</button>
+                <Button variant="dark" onClick={this.createTodo}>Add todo</Button>
             </NewTodoDiv>
         )
     }  

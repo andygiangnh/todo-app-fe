@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { toggleTodo, deleteTodo } from '../redux/actions'
 import styled from 'styled-components'
+import { Button } from 'react-bootstrap';
 
 const divStyle = {
   display: 'flex',
@@ -12,11 +13,9 @@ const Span = styled.span`
   flex: 1;
   margin-right: 10px
 `
-
-const Button = styled.button `
-  width: 20px,
-  float: right
-`
+const deleteButtonStyle = {
+  float: 'right'
+}
 
 const Todo = ({todo, onToggle, onDelete}) => {
   return (
@@ -27,7 +26,9 @@ const Todo = ({todo, onToggle, onDelete}) => {
           type="checkbox"
           checked={todo.completed}/>
         <Span>{todo.description}</Span>
-        <Button onClick={() => onDelete(todo.id)}>X</Button>
+        <Button variant="outline-danger" 
+                style={deleteButtonStyle} 
+                onClick={() => onDelete(todo.id)}>X</Button>
       </div>
   </li>
   )
