@@ -4,7 +4,9 @@ import {
   RETRIEVE_TODOS, RETRIEVE_TODOS_SUCCESS, RETRIEVE_TODOS_FAILURE,
   DELETE_TODO_STARTED, DELETE_TODO_SUCCESS, DELETE_TODO_FAILURE,
   TOGGLE_TODO_STARTED, TOGGLE_TODO_SUCCESS, TOGGLE_TODO_FAILURE,
-  LOGIN_SUCCESS
+  LOGIN_SUCCESS,
+  REGISTER_USER_SUCCESS, REGISTER_USER_FAILURE,
+  RESET_SIGNUP_FORM
 } from './actionTypes'
 import API from './api'
 
@@ -34,6 +36,32 @@ export const deleteTodo = id => dispatch => {
       dispatch(deleteTodoFailure(err.message))
     })
 }
+
+// register
+export const register = user => async dispatch => {
+  try {
+    await API.post(`register`, user)
+    dispatch(registerUserSuccess())
+  } catch (err) {
+    dispatch(registerUserFailure(err.response.data))
+  }
+}
+
+export const resetSignupForm = () => ({
+  type: RESET_SIGNUP_FORM
+})
+
+export const registerUserSuccess = () => ({
+  type: REGISTER_USER_SUCCESS
+})
+
+export const registerUserFailure = (res) => ({
+  type: REGISTER_USER_FAILURE,
+  payload: {
+    message: res.message,
+    errors: res.errors
+  }
+})
 
 export const addTodo = (description) => ({
   type: ADD_TODO_STARTED,

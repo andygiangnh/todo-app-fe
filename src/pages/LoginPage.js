@@ -55,14 +55,14 @@ class LoginPage extends React.Component {
             }}
           >
             {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
-                <form onSubmit={handleSubmit}>
-                  <div className="form-group">
-                  <label htmlFor="username">User Name</label>
-                  <input type="text" name="username" id="username" className="form-control" 
-                    placeholder="username"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.username} />
+              <form onSubmit={handleSubmit}>
+                <div className="form-group">
+                <label htmlFor="username">User Name</label>
+                <input type="text" name="username" id="username" className="form-control" 
+                  placeholder="username"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.username} />
                   {errors.username && touched.username && 
                     <span style={style}>{ errors.username }</span>}
                 </div>

@@ -6,6 +6,7 @@ import ProtectedRoute from './auth/ProtectedRoute'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 import Navigation from './component/Navigation';
+import Register from './component/Register';
 
 export default class App extends Component {
   render() {
@@ -15,6 +16,7 @@ export default class App extends Component {
         <div className="container mt-3">
           <Switch>
             <Route exact path="/" component={LoginPage} />
+            <Route exact path="/register" component={Register} />
             <ProtectedRoute exact path="/app" component={TodoMain} />
             <Route path="*" component={() => "404 NOT found"} />
           </Switch>  
