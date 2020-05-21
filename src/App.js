@@ -6,7 +6,7 @@ import ProtectedRoute from './auth/ProtectedRoute'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 import Navigation from './component/Navigation';
-import Register from './component/Register';
+import Register from './pages/RegisterPage';
 
 export default class App extends Component {
   render() {

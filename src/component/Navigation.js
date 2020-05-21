@@ -66,7 +66,7 @@ class Navigation extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.todos.user
+  user: state.user.user
 })
 
 export default connect(mapStateToProps)(Navigation)

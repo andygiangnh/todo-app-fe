@@ -21,7 +21,7 @@ const Logout = (props) => {
 }
 
 const mapStateToProps = state => ({
-    logout: state.todos.logout
+    logout: state.user.logout
 })
 
 export default withRouter(connect(mapStateToProps)(Logout))

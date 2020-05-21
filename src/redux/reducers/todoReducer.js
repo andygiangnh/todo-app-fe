@@ -2,15 +2,12 @@ import {
   ADD_TODO_STARTED, ADD_TODO_SUCCESS, ADD_TODO_FAILURE,
   RETRIEVE_TODOS, RETRIEVE_TODOS_SUCCESS, RETRIEVE_TODOS_FAILURE,
   DELETE_TODO_STARTED, DELETE_TODO_SUCCESS, DELETE_TODO_FAILURE,
-  TOGGLE_TODO_STARTED, TOGGLE_TODO_SUCCESS, TOGGLE_TODO_FAILURE,
-  LOGOUT,
-  LOGIN_SUCCESS
+  TOGGLE_TODO_STARTED, TOGGLE_TODO_SUCCESS, TOGGLE_TODO_FAILURE
 } from '../actions/actionTypes'
 
 const initialState = {
   todos: [],
   loading: {},
-  logout: false,
   user: undefined,
   error: {}
 }
@@ -154,16 +151,6 @@ export default function (state = initialState, action) {
           ...state.error,
           toggle: action.payload.error
         }
-      }
-    case LOGOUT:
-      return {
-        ...state,
-        logout: true
-      }
-    case LOGIN_SUCCESS:
-      return {
-        ...state,
-        user: action.payload.user
       }
     default:
       return state
