@@ -93,6 +93,8 @@ class Register extends Component {
                 />
                 {errors.password && touched.password &&
                     <span style={style}>{errors.password}</span>}
+                {signupErrors.password && touched.email &&
+                    <span style={style}>{signupErrors.password}</span>}
               </div>
               <div className="form-group">
                 {signupErrors && message &&
@@ -106,9 +108,7 @@ class Register extends Component {
             )}            
             </Formik>
           )
-        :<span>User registration is successful!</span>}
-
-          
+        :<span>User registration is successful!</span>}          
         </div>
       </div>
     )

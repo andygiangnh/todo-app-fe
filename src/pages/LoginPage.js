@@ -1,5 +1,5 @@
 import React from 'react'
-import { Formik } from 'formik'
+import { Formik, Field } from 'formik'
 import * as Yup from 'yup'
 import auth from '../auth/auth'
 import { connect } from 'react-redux'
@@ -30,13 +30,13 @@ class LoginPage extends React.Component {
     if(auth.isAuthenticated()) {
       this.setState({loginStatus:''})
       this.props.postLogin(user)
-      this.props.history.push('/app')
+      this.props.history.push('/home')
     } else {
       this.setState({loginStatus:'Invalid login'})
     }
   }
-  
-  render() {
+
+  renderLoginForm = () => {
     return (
       <div className="col-md-12">
         <div className="card card-container">
@@ -57,22 +57,14 @@ class LoginPage extends React.Component {
             {({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
               <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                <label htmlFor="username">User Name</label>
-                <input type="text" name="username" id="username" className="form-control" 
-                  placeholder="username"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.username} />
+                  <label htmlFor="username">User Name</label>
+                  <Field name="username" type="input" className="form-control" placeholder="Username" />
                   {errors.username && touched.username && 
                     <span style={style}>{ errors.username }</span>}
                 </div>
                 <div className="form-group">
                   <label htmlFor="password">Password</label>
-                  <input type="password" name="password" id="password" className="form-control" 
-                    placeholder="Password"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.password} />
+                  <Field name="password" type="password" className="form-control" placeholder="Password" />
                   {errors.password && touched.password &&
                     <span style={style}>{errors.password}</span>}
                 </div>
@@ -91,7 +83,20 @@ class LoginPage extends React.Component {
       </div>
     )
   }
+  
+  render() {
+    return (
+      !this.props.user? this.renderLoginForm(this.state)
+      : <h3>already login</h3>
+    )
+  }
 }
+
+const mapStateToProps = state => (
+  {
+      user: state.user.user
+  }
+)
 
 const mapDispatchToProps = dispatch => (
   {
@@ -99,4 +104,4 @@ const mapDispatchToProps = dispatch => (
   }
 )
 
-export default connect(null, mapDispatchToProps)(LoginPage)
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage)

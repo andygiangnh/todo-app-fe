@@ -23,8 +23,8 @@ class Navigation extends Component {
 
               {currentUser && (
                 <li className="nav-item">
-                  <Link to={"/user"} className="nav-link">
-                    Profile
+                  <Link to={"/app"} className="nav-link">
+                    Todos
                   </Link>
                 </li>
               )}

@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "./App.css";
 import Navigation from './component/Navigation';
 import Register from './pages/RegisterPage';
+import Home from './component/Home';
 
 export default class App extends Component {
   render() {
@@ -17,6 +18,7 @@ export default class App extends Component {
           <Switch>
             <Route exact path="/" component={LoginPage} />
             <Route exact path="/register" component={Register} />
+            <ProtectedRoute exact path="/home" component={Home} />
             <ProtectedRoute exact path="/app" component={TodoMain} />
             <Route path="*" component={() => "404 NOT found"} />
           </Switch>  
