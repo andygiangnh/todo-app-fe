@@ -17,9 +17,7 @@ class ProfilePage extends Component {
         const { roles } = this.props.user
         return (
         <div className="profile-head">
-            <h5>
-                Kshiti Ghelani
-            </h5>
+            <h5>{this.props.user.fullName}</h5>
             <h6>
                 {roles.map(role => <span key={role}>{role}&nbsp;</span>)}
             </h6>
@@ -45,7 +43,7 @@ class ProfilePage extends Component {
                         <label>Name</label>
                     </div>
                     <div className="col-md-6">
-                        <p>Kshiti Ghelani</p>
+                        <p>{this.props.user.fullName}</p>
                     </div>
                 </div>
                 <div className="row">
