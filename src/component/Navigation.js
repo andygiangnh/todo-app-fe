@@ -39,26 +39,23 @@ class Navigation extends Component {
               
             </div>
 
-            {currentUser ? (
               <div className="navbar-nav ml-auto">
-                <li className="nav-item">
+              {currentUser && <li className="nav-item">
                   <Link to={"/profile"} className="nav-link">
                     {currentUser.username}
                   </Link>
-                </li>
+                </li>}
                 <li className="nav-item">
                   <Logout />
                 </li>
               </div>
-            ) : (
-              <div className="navbar-nav ml-auto">
+            {!currentUser && <div className="navbar-nav ml-auto">
                 <li className="nav-item">
                   <Link to={"/register"} className="nav-link">
                     Sign Up
                   </Link>
                 </li>
-              </div>
-            )}
+              </div>}
           </nav>
       </div>
     )

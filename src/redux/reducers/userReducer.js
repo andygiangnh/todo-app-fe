@@ -18,12 +18,14 @@ export default function (state = initialState, action) {
         case LOGOUT:
             return {
                 ...state,
+                user: undefined,
                 logout: true
             }
         case LOGIN_SUCCESS:
             return {
                 ...state,
-                user: action.payload.user
+                user: action.payload.user,
+                logout: false
             }
         case REGISTER_USER_SUCCESS:
             return {

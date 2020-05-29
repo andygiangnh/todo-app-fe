@@ -8,6 +8,7 @@ import "./App.css";
 import Navigation from './component/Navigation';
 import Register from './pages/RegisterPage';
 import Home from './component/Home';
+import ProfilePage from './pages/ProfilePage';
 
 export default class App extends Component {
   render() {
@@ -20,6 +21,7 @@ export default class App extends Component {
             <Route exact path="/register" component={Register} />
             <ProtectedRoute exact path="/home" component={Home} />
             <ProtectedRoute exact path="/app" component={TodoMain} />
+            <ProtectedRoute exact path="/profile" component={ProfilePage} />
             <Route path="*" component={() => "404 NOT found"} />
           </Switch>  
         </div>

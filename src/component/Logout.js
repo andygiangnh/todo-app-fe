@@ -6,21 +6,21 @@ import auth from '../auth/auth'
 const Logout = (props) => {
     return (
         <>
-            { !props.logout ? 
-                <div>
-                    <a href="/" className="nav-link" onClick={() => {
-                        auth.logout(() => {
-                            props.history.push("/")
-                        })
-                    }}>Logout</a>
-                </div>
-                : <Redirect to={ { pathname: '/' } } />
+            { props.user && 
+                <a href="/" className="nav-link" onClick={() => {
+                    auth.logout(() => {
+                        props.history.push("/")
+                    })
+                }}>Logout</a>
             }
+
+            { props.logout && <Redirect to={ { pathname: '/' } } />}
         </>
     )
 }
 
 const mapStateToProps = state => ({
+    user: state.user.user,
     logout: state.user.logout
 })
 
